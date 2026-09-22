@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NOGAWA Asase 野川浅瀬</title>
 <meta name="description" content="Knitting, crochet, a game in progress, and zines. Based in Japan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,6 +40,8 @@
     max-width: 560px;
     margin: 0 auto;
     padding: 96px 24px 120px;
+    padding-top: calc(96px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
   }
 
   header {
@@ -139,21 +141,6 @@
     margin-bottom: 16px;
   }
 
-  .game-frame {
-    border: 1px solid var(--line);
-    padding: 28px 20px;
-    color: var(--ink-soft);
-    font-size: 0.95rem;
-  }
-
-  /*
-    When the game is ready, replace the block below with the embed code
-    (e.g. an <iframe> from itch.io or similar).
-  */
-  .game-placeholder {
-    /* embed target */
-  }
-
   footer {
     margin-top: 56px;
     color: var(--ink-soft);
@@ -163,6 +150,8 @@
   @media (max-width: 480px) {
     .wrap {
       padding: 64px 20px 96px;
+      padding-top: calc(64px + env(safe-area-inset-top, 0px));
+      padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
     }
 
     h1 {
@@ -177,6 +166,26 @@
     a.item-link {
       transition: none;
     }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1B1F1C;
+      --ink: #E7EAE4;
+      --ink-soft: #A9B39F;
+      --line: #3A413A;
+      --divider: #4B5348;
+      --accent: #8FBFA3;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #1B1F1C;
+    --ink: #E7EAE4;
+    --ink-soft: #A9B39F;
+    --line: #3A413A;
+    --divider: #4B5348;
+    --accent: #8FBFA3;
   }
 </style>
 </head>
@@ -207,7 +216,7 @@
     </section>
 
     <section>
-      <p class="label">Zines</p>
+      <p class="label">ZINES</p>
       <ul class="item-list">
         <li>
           <a class="item-link" href="https://c.bunfree.net/p/tokyo42/63899" target="_blank" rel="noopener">Making Topological Crochet, Part 1: From Zero Experience to the Möbius Strip</a>
@@ -222,10 +231,12 @@
 
     <section>
       <p class="label">Game</p>
-      <span class="status">In progress</span>
-      <div class="game-frame game-placeholder">
-        A small game is currently in production. The embed will appear here once it's ready.
-      </div>
+      <ul class="item-list">
+        <li>
+          <a class="item-link" href="https://nogawaasase.itch.io/high-high-high-jump" target="_blank" rel="noopener">High High High Jump</a>
+          <span class="meta">on itch.io</span>
+        </li>
+      </ul>
     </section>
 
     <footer>
