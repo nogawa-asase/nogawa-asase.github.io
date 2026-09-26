@@ -1,9 +1,74 @@
-# NOGAWA Asase 野川浅瀬
+# メモ代わりのアイコン
 
-**Website: [nogawa-asase.github.io](https://nogawa-asase.github.io/)**
+文字と色と書体を自分で決めたアイコンを作って、スマートフォンのホーム画面に置けるWebアプリです。
 
-## About this repository
+覚えておきたい短いメモなどを、素早く参照できます。
 
-This repository hosts the source of [nogawa-asase.github.io](https://nogawa-asase.github.io/), a single static page (`index.html`) served with GitHub Pages. No build step, no framework. Last updated by hand, occasionally.
+**公開ページ：** https://nogawa-asase.github.io/make-icon/
 
-このリポジトリは、GitHub Pagesで公開している個人サイトのソースです。`index.html` 1枚だけの静的ページで、ビルドやフレームワークは使っていません。
+## できること
+
+- **文字**：1〜3行まで入力でき、行ごとに左揃え・中央揃え・右揃えを切り替えられます。絵文字も使えます。
+- **色**：ビビッド・パステル・くすみ・ディープ・モノトーンの5トーン×10色（計50色）。横にスワイプしてトーンを切り替えます。文字色は背景の明るさに合わせて白か黒が自動で選ばれます。
+- **グラデーション**：チェックを入れると、iPhoneのアイコンのように上が明るく下が暗いグラデーションがかかります。
+- **書体**：10種類（太ゴシック・明朝・丸ゴシック・極太・ポップ・立体・ドット・毛筆・まる文字・マーカー）。
+
+## 使い方
+
+### iPhone
+
+1. Safariで公開ページを開き、文字・色・書体を決める
+2. 画面下の共有ボタン（□に↑）をタップ
+3. 「ホーム画面に追加」を選ぶ
+4. 「Webアプリとして開く」のチェックはOFFがおすすめ
+5. アイコンと名前を確認して「追加」
+
+### Android
+
+1. Chromeで公開ページを開き、文字・色・書体を決める
+2. 右上のメニュー（︙）をタップ
+3. 「ホーム画面に追加」を選ぶ
+4. 名前を確認して「追加」
+
+ページを開いた端末に合わせて、画面下部に表示される手順も自動で切り替わります。
+
+## 注意点
+
+- **ホーム画面に置いたアイコンは後から変更できません。** 変えたいときは、アイコンを削除して作り直してください。
+- **Androidでは、作ったアイコンが反映されない場合があります。** この仕組みはiPhoneの方式を前提にしていて、Androidでの動作は十分に確認できていません。
+- 書体はGoogle Fontsから読み込むため、初回や電波の弱い場所では反映に少し時間がかかることがあります。プレビューが選んだ書体になってから追加してください。
+
+## しくみ
+
+- 1つのHTMLファイル（`index.html`）だけで動く静的なページで、GitHub Pagesで公開しています。
+- アイコン画像はブラウザ内のcanvasでその場で描き、data URL形式で `apple-touch-icon` に設定しています。iPhoneは「ホーム画面に追加」を押した時点のこの画像をアイコンとして保存します。
+- 絵文字などで書体の幅の情報と実際の描画がずれることがあるため、一度裏で文字を描いて、実際に色がついた範囲を測ってから配置しています。
+
+## ファイル構成
+
+```
+make-icon/
+├── index.html   # アプリ本体（HTML・CSS・JavaScriptをすべて含む）
+└── README.md
+```
+
+## 使用している書体
+
+すべて [Google Fonts](https://fonts.google.com/) の書体で、[SIL Open Font License](https://openfontlicense.org/) のもとで提供されています。
+
+| 表示名 | 書体名 |
+|---|---|
+| 太ゴシック | Noto Sans JP |
+| 明朝 | Noto Serif JP |
+| 丸ゴシック | M PLUS Rounded 1c |
+| 極太 | Dela Gothic One |
+| ポップ | RocknRoll One |
+| 立体 | Rampart One |
+| ドット | DotGothic16 |
+| 毛筆 | Yuji Syuku |
+| まる文字 | Hachi Maru Pop |
+| マーカー | Yusei Magic |
+
+## 作者
+
+野川浅瀬 — https://nogawa-asase.github.io/
