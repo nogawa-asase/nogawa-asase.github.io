@@ -1,265 +1,451 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>NOGAWA Asase 野川浅瀬</title>
-<meta name="description" content="Knitting, crochet, a game in progress, and zines. Based in Japan.">
+<title>文字アイコン</title>
+<meta id="app-title" name="apple-mobile-web-app-title" content="文字アイコン">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link id="touch-icon" rel="apple-touch-icon" href="">
+<link id="fav-icon" rel="icon" type="image/png" href="">
+<!-- 書体（すべてGoogle Fonts / SIL Open Font License） -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&family=Noto+Serif+JP:wght@900&family=M+PLUS+Rounded+1c:wght@800&family=Dela+Gothic+One&family=Yuji+Syuku&family=DotGothic16&family=RocknRoll+One&family=Rampart+One&family=Hachi+Maru+Pop&family=Yusei+Magic&display=swap">
 <style>
   :root {
-    --paper: #C9D3C4;
-    --ink: #1F2321;
-    --ink-soft: #4B5348;
-    --line: #A9B39F;
-    --divider: #83917A;
-    --accent: #2F4A3D;
-  }
-
-  * {
+    --bg: #EEF0EC; --ink: #1D2320; --sub: #5E6862; --line: #CDD2CC; --card: #FFFFFF;
     box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .wrap {
-    max-width: 560px;
-    margin: 0 auto;
-    padding: 96px 24px 120px;
-    padding-top: calc(96px + env(safe-area-inset-top, 0px));
-    padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
-  }
-
-  header {
-    margin-bottom: 72px;
-  }
-
-  h1 {
-    font-family: 'Newsreader', Georgia, serif;
-    font-weight: 500;
-    font-size: 2.1rem;
-    letter-spacing: -0.01em;
-    margin: 0 0 14px;
-    color: var(--ink);
-  }
-
-  header p {
-    margin: 0;
-    max-width: 40ch;
-    color: var(--ink-soft);
-    font-size: 1rem;
-  }
-
-  header p.location {
-    margin-top: 10px;
-    font-size: 0.92rem;
-  }
-
-  section {
-    border-top: 1.5px solid var(--divider);
-    padding: 32px 0;
-  }
-
-  section:last-of-type {
-    border-bottom: 1.5px solid var(--divider);
-  }
-
-  .label {
-    font-family: 'Newsreader', Georgia, serif;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    font-size: 1.5rem;
-    color: var(--ink);
-    margin: 0 0 20px;
-  }
-
-  ul.item-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  ul.item-list li + li {
-    margin-top: 20px;
-  }
-
-  a.item-link {
-    display: inline-block;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px dotted var(--ink-soft);
-    padding-bottom: 1px;
-    transition: border-color 0.15s ease, border-style 0.15s ease, color 0.15s ease;
-  }
-
-  a.item-link:hover,
-  a.item-link:focus-visible {
-    color: var(--accent);
-    border-bottom-style: solid;
-    border-color: var(--accent);
-  }
-
-  a.item-link:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-  }
-
-  .meta {
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-    margin-left: 8px;
-  }
-
-  .jp-title {
-    display: block;
-    color: var(--ink-soft);
-    font-size: 0.92rem;
-    margin-top: 4px;
-  }
-
-  .status {
-    display: inline-block;
-    font-size: 0.85rem;
-    color: var(--ink-soft);
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    padding: 2px 8px;
-    margin-bottom: 16px;
-  }
-
-  footer {
-    margin-top: 56px;
-    color: var(--ink-soft);
-    font-size: 0.85rem;
-  }
-
-  @media (max-width: 480px) {
-    .wrap {
-      padding: 64px 20px 96px;
-      padding-top: calc(64px + env(safe-area-inset-top, 0px));
-      padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
-    }
-
-    h1 {
-      font-size: 1.8rem;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    a.item-link {
-      transition: none;
-    }
-  }
-
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper: #1B1F1C;
-      --ink: #E7EAE4;
-      --ink-soft: #A9B39F;
-      --line: #3A413A;
-      --divider: #4B5348;
-      --accent: #8FBFA3;
-    }
+    :root { --bg: #1A1E1C; --ink: #E8ECE9; --sub: #9BA59F; --line: #343B37; --card: #232826; }
   }
+  *, *::before, *::after { box-sizing: inherit; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif; line-height: 1.7;
+  }
+  main { max-width: 26rem; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+  h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
+  .lead { color: var(--sub); font-size: .9rem; margin: 0 0 1.75rem; }
+  h2 { font-size: .95rem; margin: 0 0 .6rem; }
+  .group { margin-bottom: 1.75rem; }
 
-  :root[data-theme="dark"] {
-    --paper: #1B1F1C;
-    --ink: #E7EAE4;
-    --ink-soft: #A9B39F;
-    --line: #3A413A;
-    --divider: #4B5348;
-    --accent: #8FBFA3;
+  .preview { display: flex; justify-content: center; margin-bottom: 2rem; }
+  .preview img { width: 9rem; height: 9rem; border-radius: 22.5%; box-shadow: 0 6px 18px rgba(0,0,0,.18); background: var(--line); }
+
+  button { font-family: inherit; color: var(--ink); cursor: pointer; }
+  button:focus-visible, input:focus-visible { outline: 3px solid #3B7BD9; outline-offset: 2px; }
+
+  /* 行数 */
+  .seg { display: flex; border: 1px solid var(--line); border-radius: .6rem; overflow: hidden; margin-bottom: .75rem; }
+  .seg button { flex: 1; padding: .55rem; font-size: 1rem; border: 0; background: var(--card); }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+  /* 各行の入力 */
+  .line-row { display: flex; gap: .5rem; margin-bottom: .5rem; }
+  .line-row input {
+    flex: 1; min-width: 0; font-size: 1.2rem; padding: .5rem .75rem; border-radius: .6rem;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink); font-family: inherit;
   }
+  .align-btn {
+    flex: 0 0 3rem; border: 1px solid var(--line); border-radius: .6rem; background: var(--card);
+    display: grid; place-items: center; padding: 0;
+  }
+  .align-btn svg { width: 1.4rem; height: 1.4rem; }
+
+  /* 色 */
+  .palette {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .palette::-webkit-scrollbar { display: none; }
+  .page {
+    flex: 0 0 100%; scroll-snap-align: start;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: .75rem; padding: .35rem .35rem .5rem;
+  }
+  .swatch {
+    aspect-ratio: 1; width: 100%; border-radius: 50%; border: 1px solid rgba(0,0,0,.08); padding: 0;
+    outline: 2px solid transparent; outline-offset: 3px;
+  }
+  .swatch[aria-pressed="true"] { outline-color: var(--ink); }
+  .dots { display: flex; justify-content: center; gap: .45rem; margin-top: .35rem; }
+  .dots span { width: .45rem; height: .45rem; border-radius: 50%; background: var(--line); transition: background .2s; }
+  .dots span.on { background: var(--ink); }
+
+  .check { display: flex; align-items: center; gap: .5rem; margin-top: .9rem; font-size: .95rem; cursor: pointer; }
+  .check input { width: 1.25rem; height: 1.25rem; margin: 0; accent-color: var(--ink); }
+
+  /* 書体 */
+  .fonts { display: grid; grid-template-columns: repeat(2, 1fr); gap: .5rem; }
+  .font-btn {
+    display: flex; align-items: center; gap: .6rem; text-align: left;
+    padding: .5rem .7rem; border: 1px solid var(--line); border-radius: .6rem; background: var(--card);
+  }
+  .font-btn[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .font-btn .sample { font-size: 1.5rem; line-height: 1.2; min-width: 2.6rem; }
+  .font-btn .label { font-size: .78rem; color: var(--sub); line-height: 1.3; }
+
+  .steps { background: var(--card); border: 1px solid var(--line); border-radius: .75rem; padding: 1rem 1.25rem; }
+  .steps ol { margin: 0; padding-left: 1.25rem; }
+  .steps p { margin: 0; }
+  .steps .note { font-size: .8rem; color: var(--sub); margin-top: .6rem; }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>NOGAWA Asase 野川浅瀬</h1>
-      <p>Knitting, crochet, a game in progress, and zines.</p>
-      <p class="location">Based in Japan.</p>
-    </header>
+<main>
+  <h1>メモ代わりのアイコンを作る</h1>
+  <p class="lead">文字と色と書体を自分で決めたアイコンを、ホーム画面に置けます</p>
 
-    <section>
-      <p class="label">Instagram</p>
-      <ul class="item-list">
-        <li>
-          <a class="item-link" href="https://www.instagram.com/nogawa_asase/" target="_blank" rel="noopener">instagram.com/nogawa_asase</a>
-        </li>
-      </ul>
-    </section>
-
-    <section>
-      <p class="label">note</p>
-      <ul class="item-list">
-        <li>
-          <a class="item-link" href="https://note.com/nogawa_asase" target="_blank" rel="noopener">note.com/nogawa_asase</a>
-        </li>
-      </ul>
-    </section>
-
-<section>
-  <p class="label">Web App</p>
-  <ul class="item-list">
-    <li>
-      <a class="item-link" href="https://nogawa-asase.github.io/sakamichi/" target="_blank" rel="noopener">ルート標高断面図ツール</a>
-      <span class="meta">route elevation profile tool</span>
-    </li>
-    <li>
-      <a class="item-link" href="https://nogawa-asase.github.io/ijin-timeline/" target="_blank" rel="noopener">偉人の時代</a>
-      <span class="meta">historical figures timeline</span>
-    </li>
-    <li>
-      <a class="item-link" href="https://nogawa-asase.github.io/make-icon/" target="_blank" rel="noopener">メモ代わりのアイコンを作る</a>
-      <span class="meta">home screen memo icon maker</span>
-    </li>
-  </ul>
-</section>
-
-    <section>
-      <p class="label">Game</p>
-      <ul class="item-list">
-        <li>
-          <a class="item-link" href="https://nogawaasase.itch.io/high-high-high-jump" target="_blank" rel="noopener">High High High Jump</a>
-          <span class="meta">on itch.io</span>
-        </li>
-      </ul>
-    </section>
-
-<section>
-<p class="label">Web App</p>
-<ul class="item-list">
-<li>
-<a class="item-link" href="https://nogawa-asase.github.io/sakamichi/" target="_blank" rel="noopener">ルート標高断面図ツール</a>
-<span class="meta">route elevation profile tool</span>
-</li>
-<li>
-<a class="item-link" href="https://nogawa-asase.github.io/ijin-timeline/" target="_blank" rel="noopener">偉人の時代</a>
-<span class="meta">historical figures timeline</span>
-</li>
-</ul>
-</section>
-
-    <footer>
-      Last updated by hand, occasionally.
-    </footer>
+  <div class="group">
+    <h2>文字</h2>
+    <div class="seg" id="line-count">
+      <button data-n="1" aria-pressed="true">1行</button>
+      <button data-n="2" aria-pressed="false">2行</button>
+      <button data-n="3" aria-pressed="false">3行</button>
+    </div>
+    <div id="lines"></div>
   </div>
+
+  <div class="preview"><img id="preview" alt="作ったアイコンのプレビュー"></div>
+
+  <div class="group">
+    <h2>色</h2>
+    <div class="palette" id="palette"></div>
+    <div class="dots" id="dots"></div>
+    <label class="check"><input type="checkbox" id="gradient"> グラデーション</label>
+  </div>
+
+  <div class="group">
+    <h2>書体</h2>
+    <div class="fonts" id="fonts"></div>
+  </div>
+
+  <div class="steps">
+    <h2>ホーム画面への追加</h2>
+    <div id="steps-body"></div>
+  </div>
+</main>
+
+<script>
+  const SIZE = 180;
+
+  // ---- 色：トーンごとに10色（色相の並びはどのページも同じ） ----
+  const HUES = ["赤", "橙", "黄", "黄緑", "緑", "青緑", "青", "藍", "紫", "桃"];
+  const TONES = [
+    { name: "ビビッド", colors: ["#E53935","#F4511E","#F9A825","#7CB342","#2E9E5B","#00A3A3","#1E88E5","#3949AB","#8E44AD","#D81B60"] },
+    { name: "パステル", colors: ["#F7B7B3","#F9CBA7","#F8E3A1","#D6E9A8","#B5E0C3","#A8DEDB","#AFCFF2","#BFC4EE","#D7BDEB","#F4B8D2"] },
+    { name: "くすみ",   colors: ["#B9807A","#C29A7E","#BFAE7F","#9FAA84","#83A390","#7FA3A2","#8497AE","#8E8DAE","#A08AA6","#B58799"] },
+    { name: "ディープ", colors: ["#8B1E24","#9A4210","#8A6A0E","#4F6B1E","#1E5E3A","#0E5C5E","#173F73","#262F6E","#4B2463","#7A1D4A"] },
+    { name: "モノトーン", colors: ["#FFFFFF","#E6E6E6","#CCCCCC","#B3B3B3","#999999","#7A7A7A","#5C5C5C","#404040","#262626","#000000"],
+      labels: ["白","グレー1","グレー2","グレー3","グレー4","グレー5","グレー6","グレー7","グレー8","黒"] }
+  ];
+
+  // ---- 書体：10種類（Google Fonts） ----
+  const FONTS = [
+    { family: "Noto Sans JP",       weight: 900, label: "太ゴシック" },
+    { family: "Noto Serif JP",      weight: 900, label: "明朝" },
+    { family: "M PLUS Rounded 1c",  weight: 800, label: "丸ゴシック" },
+    { family: "Dela Gothic One",    weight: 400, label: "極太" },
+    { family: "RocknRoll One",      weight: 400, label: "ポップ" },
+    { family: "Rampart One",        weight: 400, label: "立体" },
+    { family: "DotGothic16",        weight: 400, label: "ドット" },
+    { family: "Yuji Syuku",         weight: 400, label: "毛筆" },
+    { family: "Hachi Maru Pop",     weight: 400, label: "まる文字" },
+    { family: "Yusei Magic",        weight: 400, label: "マーカー" }
+  ];
+
+  // 書体ボタンの見本の文字（英字・数字・ひらがな）
+  const SAMPLE = "A1あ";
+
+  const ALIGNS = ["left", "center", "right"];
+  const ALIGN_LABEL = { left: "左揃え", center: "中央揃え", right: "右揃え" };
+  const ALIGN_ICON = {
+    left:   '<path d="M3 5h18M3 10h12M3 15h18M3 20h12"/>',
+    center: '<path d="M3 5h18M6 10h12M3 15h18M6 20h12"/>',
+    right:  '<path d="M3 5h18M9 10h12M3 15h18M9 20h12"/>'
+  };
+
+  const state = {
+    n: 1,
+    texts: ["A1", "", ""],
+    aligns: ["center", "center", "center"],
+    bg: TONES[0].colors[6],
+    gradient: false,
+    font: 0
+  };
+
+  const $ = id => document.getElementById(id);
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = SIZE;
+  const ctx = canvas.getContext("2d");
+
+  // 背景の明るさから文字色（白 or 黒）を自動で決める
+  function luminance(hex) {
+    const c = [1, 3, 5].map(i => parseInt(hex.substr(i, 2), 16) / 255)
+      .map(v => v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function textColorFor(bg) {
+    const L = luminance(bg);
+    const cWhite = 1.05 / (L + 0.05), cDark = (L + 0.05) / (luminance("#1F1F1F") + 0.05);
+    return cWhite >= cDark ? "#FFFFFF" : "#1F1F1F";
+  }
+
+  // 2色を割合tで混ぜる（グラデーションの明るい側・暗い側を作る）
+  function mix(a, b, t) {
+    const p = h => [1, 3, 5].map(i => parseInt(h.substr(i, 2), 16));
+    const A = p(a), B = p(b);
+    return "#" + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, "0")).join("");
+  }
+
+  // ---- 描画 ----
+  function fontString(f, px) { return `${f.weight} ${px}px "${f.family}"`; }
+
+  // ---- 文字の「実際に描かれた範囲」を測る ----
+  // フォントが返す幅と、実際に描かれる絵文字などの幅がずれることがあるため、
+  // 一度裏で描いてみて、色がついたピクセルの範囲から位置を決める
+  const REF = 120;
+  const meas = document.createElement("canvas");
+  meas.width = REF * 14; meas.height = REF * 3;
+  const mctx = meas.getContext("2d", { willReadFrequently: true });
+  const layer = document.createElement("canvas");
+  layer.width = layer.height = SIZE;
+  const lctx = layer.getContext("2d", { willReadFrequently: true });
+
+  function inkBoxX(text, f) {
+    const W = meas.width, H = meas.height, x0 = REF;
+    mctx.clearRect(0, 0, W, H);
+    mctx.font = fontString(f, REF);
+    mctx.textAlign = "left";
+    mctx.textBaseline = "middle";
+    mctx.fillStyle = "#000";
+    mctx.fillText(text, x0, H / 2);
+    const d = mctx.getImageData(0, 0, W, H).data;
+    let min = W, max = -1;
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        if (d[(y * W + x) * 4 + 3] > 16) { if (x < min) min = x; if (x > max) max = x; }
+      }
+    }
+    return max < 0 ? null : { left: min - x0, width: max - min + 1 };
+  }
+
+  function inkBoxY(c) {
+    const d = c.getImageData(0, 0, SIZE, SIZE).data;
+    let min = SIZE, max = -1;
+    for (let y = 0; y < SIZE; y++) {
+      for (let x = 0; x < SIZE; x++) {
+        if (d[(y * SIZE + x) * 4 + 3] > 16) { if (y < min) min = y; max = y; break; }
+      }
+    }
+    return max < 0 ? null : { top: min, bottom: max };
+  }
+
+  function draw() {
+    const f = FONTS[state.font];
+    const lines = state.texts.slice(0, state.n);
+
+    const margin = SIZE * 0.12;
+    const maxW = SIZE - margin * 2;
+    const maxH = state.n === 1 ? SIZE * 0.62 : SIZE * 0.78;
+    const LH = 1.12; // 行の高さ（文字サイズに対する倍率）
+
+    // 各行の実際の横幅を測り、一番長い行が収まるサイズを決める
+    const boxes = lines.map(t => t ? inkBoxX(t, f) : null);
+    const widest = Math.max(1, ...boxes.map(b => b ? b.width : 0));
+    const size = Math.min(maxH / (state.n * LH), maxW / widest * REF);
+    const k = size / REF;
+    const lh = size * LH;
+    const top = (SIZE - lh * state.n) / 2 + lh / 2;
+
+    // 文字だけを透明なレイヤーに描く
+    lctx.clearRect(0, 0, SIZE, SIZE);
+    lctx.font = fontString(f, size);
+    lctx.fillStyle = textColorFor(state.bg);
+    lctx.textAlign = "left";
+    lctx.textBaseline = "middle";
+    lines.forEach((t, i) => {
+      const b = boxes[i];
+      if (!b) return;
+      const w = b.width * k;
+      const a = state.aligns[i];
+      const inkLeft = a === "left" ? margin : a === "right" ? SIZE - margin - w : (SIZE - w) / 2;
+      lctx.fillText(t, inkLeft - b.left * k, top + lh * i);
+    });
+
+    // 実際に描かれた範囲で上下中央に合わせる
+    const v = inkBoxY(lctx);
+    const dy = v ? Math.round((SIZE - (v.top + v.bottom + 1)) / 2) : 0;
+
+    // 背景
+    if (state.gradient) {
+      // iPhoneのアイコン風：上を明るく、下を少し暗く
+      const g = ctx.createLinearGradient(0, 0, 0, SIZE);
+      g.addColorStop(0, mix(state.bg, "#FFFFFF", 0.28));
+      g.addColorStop(1, mix(state.bg, "#000000", 0.12));
+      ctx.fillStyle = g;
+    } else {
+      ctx.fillStyle = state.bg;
+    }
+    ctx.fillRect(0, 0, SIZE, SIZE);
+    ctx.drawImage(layer, 0, dy);
+  }
+
+  let renderToken = 0;
+  async function apply() {
+    const token = ++renderToken;
+    const f = FONTS[state.font];
+    const text = state.texts.slice(0, state.n).join("") || "あ";
+    // 使う文字の書体データを読み込んでから描く
+    try { await document.fonts.load(fontString(f, 40), text); } catch (e) {}
+    if (token !== renderToken) return; // 途中で別の操作があったら古い描画は捨てる
+
+    draw();
+    const url = canvas.toDataURL("image/png");
+    $("touch-icon").setAttribute("href", url);
+    $("fav-icon").setAttribute("href", url);
+    $("preview").src = url;
+
+    const name = state.texts.slice(0, state.n).filter(Boolean).join(" ") || "文字アイコン";
+    document.title = name;
+    $("app-title").setAttribute("content", name);
+  }
+
+  // ---- 行の入力欄 ----
+  function renderLines() {
+    const box = $("lines");
+    box.innerHTML = "";
+    for (let i = 0; i < state.n; i++) {
+      const row = document.createElement("div");
+      row.className = "line-row";
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.maxLength = 8;
+      input.autocomplete = "off";
+      input.value = state.texts[i];
+      input.setAttribute("aria-label", `${i + 1}行目の文字`);
+      input.addEventListener("input", () => { state.texts[i] = input.value; apply(); });
+
+      const btn = document.createElement("button");
+      btn.className = "align-btn";
+      const paint = () => {
+        const a = state.aligns[i];
+        btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${ALIGN_ICON[a]}</svg>`;
+        btn.setAttribute("aria-label", `${i + 1}行目：${ALIGN_LABEL[a]}（押すと切り替え）`);
+      };
+      btn.addEventListener("click", () => {
+        state.aligns[i] = ALIGNS[(ALIGNS.indexOf(state.aligns[i]) + 1) % 3];
+        paint();
+        apply();
+      });
+      paint();
+
+      row.append(input, btn);
+      box.append(row);
+    }
+  }
+
+  $("line-count").querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => {
+    $("line-count").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", "false"));
+    btn.setAttribute("aria-pressed", "true");
+    state.n = Number(btn.dataset.n);
+    renderLines();
+    apply();
+  }));
+
+  // ---- 色 ----
+  function renderPalette() {
+    const pal = $("palette"), dots = $("dots");
+    TONES.forEach((tone, p) => {
+      const page = document.createElement("div");
+      page.className = "page";
+      tone.colors.forEach((c, i) => {
+        const b = document.createElement("button");
+        b.className = "swatch";
+        b.style.background = c;
+        b.dataset.color = c;
+        b.setAttribute("aria-label", `${tone.name}：${tone.labels ? tone.labels[i] : HUES[i]}`);
+        b.setAttribute("aria-pressed", c === state.bg ? "true" : "false");
+        b.addEventListener("click", () => {
+          pal.querySelectorAll(".swatch").forEach(s => s.setAttribute("aria-pressed", "false"));
+          b.setAttribute("aria-pressed", "true");
+          state.bg = c;
+          apply();
+        });
+        page.append(b);
+      });
+      pal.append(page);
+      dots.append(document.createElement("span"));
+    });
+    const update = () => {
+      const p = Math.round(pal.scrollLeft / pal.clientWidth);
+      dots.querySelectorAll("span").forEach((d, i) => d.classList.toggle("on", i === p));
+    };
+    pal.addEventListener("scroll", update, { passive: true });
+    update();
+  }
+
+  // ---- 書体 ----
+  function renderFonts() {
+    const box = $("fonts");
+    FONTS.forEach((f, i) => {
+      const b = document.createElement("button");
+      b.className = "font-btn";
+      b.setAttribute("aria-pressed", i === state.font ? "true" : "false");
+      b.innerHTML = `<span class="sample" style="font-family:'${f.family}';font-weight:${f.weight}">${SAMPLE}</span><span class="label">${f.label}</span>`;
+      b.addEventListener("click", () => {
+        box.querySelectorAll(".font-btn").forEach(x => x.setAttribute("aria-pressed", "false"));
+        b.setAttribute("aria-pressed", "true");
+        state.font = i;
+        apply();
+      });
+      box.append(b);
+    });
+  }
+
+  $("gradient").addEventListener("change", e => { state.gradient = e.target.checked; apply(); });
+
+  // ---- OSに合わせた追加手順 ----
+  function renderSteps() {
+    const ua = navigator.userAgent;
+    const isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const isAndroid = /Android/i.test(ua);
+    const isIOSSafari = isIOS && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
+    let html;
+    if (isIOSSafari) {
+      html = `<ol>
+        <li>画面下の共有ボタン（□に↑）をタップ</li>
+        <li>「ホーム画面に追加」を選ぶ</li>
+        <li>「Webアプリとして開く」のチェックはOFFがおすすめ</li>
+        <li>アイコンと名前を確認して「追加」</li></ol>`;
+    } else if (isIOS) {
+      html = `<ol>
+        <li>ブラウザの共有ボタン（□に↑）をタップ</li>
+        <li>「ホーム画面に追加」を選ぶ</li>
+        <li>「Webアプリとして開く」のチェックはOFFがおすすめ</li>
+        <li>アイコンと名前を確認して「追加」</li></ol>
+        <p class="note">うまくいかない場合は、このページをSafariで開いてください。</p>`;
+    } else if (isAndroid) {
+      html = `<ol>
+        <li>Chromeの右上のメニュー（︙）をタップ</li>
+        <li>「ホーム画面に追加」を選ぶ</li>
+        <li>名前を確認して「追加」</li></ol>`;
+    } else {
+      html = `<p>スマートフォンでこのページを開くと、ホーム画面に追加する手順が表示されます。</p>`;
+    }
+    $("steps-body").innerHTML = html;
+  }
+
+  renderSteps();
+  renderLines();
+  renderPalette();
+  renderFonts();
+  apply();
+</script>
 </body>
 </html>
