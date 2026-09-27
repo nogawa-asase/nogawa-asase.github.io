@@ -29,7 +29,6 @@
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    overscroll-behavior: none;
   }
   body {
     display: flex;
@@ -47,7 +46,6 @@
     border-radius: 16px; overflow: hidden;
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
     position: relative;
-    touch-action: none;
   }
   model-viewer {
     width: 100%;
@@ -55,20 +53,15 @@
     max-height: 560px;
     min-height: 300px;
     --progress-bar-color: var(--highlight);
-    touch-action: none;
-    cursor: grab;
   }
-  model-viewer:active { cursor: grabbing; }
-
   #loading-overlay {
     position: absolute; inset: 0;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     background: var(--surface); gap: 14px;
     transition: opacity 0.6s; z-index: 10;
-    pointer-events: none;
   }
-  #loading-overlay.hidden { opacity: 0; }
+  #loading-overlay.hidden { opacity: 0; pointer-events: none; }
   .spinner {
     width: 48px; height: 48px;
     border: 3px solid var(--accent);
@@ -108,223 +101,49 @@
     id="mv"
     src="Scaniverse_2026-05-03_145529.glb"
     alt="3D スキャンモデル"
+    camera-controls
+    touch-action="pan-y"
+    auto-rotate
+    auto-rotate-delay="1000"
+    rotation-per-second="18deg"
     environment-image="neutral"
     shadow-intensity="1.2"
     exposure="1.0"
-    interaction-prompt="none"
-    disable-zoom
+    min-camera-orbit="auto -Infinitydeg auto"
+    max-camera-orbit="auto Infinitydeg auto"
+    interpolation-decay="200"
   ></model-viewer>
 </div>
 
 <div id="controls">
   <button id="btn-rotate" class="active" onclick="toggleRotate()">⟳ 自動回転</button>
-  <button onclick="resetView()">🎯 リセット</button>
+  <button onclick="resetCamera()">🎯 リセット</button>
   <button onclick="cycleEnv()">💡 照明切替</button>
 </div>
-<p class="hint">ドラッグで自由回転（極なし） ・ ホイール／ピンチで拡大縮小</p>
+<p class="hint">ドラッグで回転 ・ ピンチで拡大縮小 ・ 右クリックドラッグでパン</p>
 
 <script>
   const mv = document.getElementById('mv');
   const overlay = document.getElementById('loading-overlay');
+  let autoRotate = true;
+  let envIndex = 0;
+  const envs = ['neutral', 'legacy', 'commerce'];
 
-  /* ── クォータニオン演算 ── */
-  function qMul(a, b) {
-    return {
-      x: a.w*b.x + a.x*b.w + a.y*b.z - a.z*b.y,
-      y: a.w*b.y - a.x*b.z + a.y*b.w + a.z*b.x,
-      z: a.w*b.z + a.x*b.y - a.y*b.x + a.z*b.w,
-      w: a.w*b.w - a.x*b.x - a.y*b.y - a.z*b.z,
-    };
-  }
-  function qFromAxisAngle(axis, angle) {
-    const s = Math.sin(angle / 2);
-    return { x: axis.x*s, y: axis.y*s, z: axis.z*s, w: Math.cos(angle/2) };
-  }
-  function qNormalize(q) {
-    const len = Math.sqrt(q.x*q.x+q.y*q.y+q.z*q.z+q.w*q.w) || 1;
-    return { x: q.x/len, y: q.y/len, z: q.z/len, w: q.w/len };
-  }
-  // クォータニオン → XYZオイラー角(度) ※model-viewerのorientation属性形式に合わせる
-  function qToEulerXYZDeg(q) {
-    const { x, y, z, w } = q;
-    const m13 = 2*(x*z + y*w);
-    const m23 = 2*(y*z - x*w);
-    const m33 = 1 - 2*(x*x + y*y);
-    const m12 = 2*(x*y - z*w);
-    const m11 = 1 - 2*(y*y + z*z);
-    const m32 = 2*(y*z + x*w);
-    const m22 = 1 - 2*(x*x + z*z);
-
-    const clamp = v => Math.max(-1, Math.min(1, v));
-    let ex, ey, ez;
-    ey = Math.asin(clamp(m13));
-    if (Math.abs(m13) < 0.9999999) {
-      ex = Math.atan2(-m23, m33);
-      ez = Math.atan2(-m12, m11);
-    } else {
-      ex = Math.atan2(m32, m22);
-      ez = 0;
-    }
-    const toDeg = r => (r * 180 / Math.PI).toFixed(3);
-    return `${toDeg(ex)}deg ${toDeg(ey)}deg ${toDeg(ez)}deg`;
-  }
-
-  const AXIS_X = { x: 1, y: 0, z: 0 };
-  const AXIS_Y = { x: 0, y: 1, z: 0 };
-
-  let orientation = { x: 0, y: 0, z: 0, w: 1 };
-  let radius = null;       // ズーム用の距離(m)
-  let initialRadius = null;
-  let fixedTheta = 0, fixedPhi = 0; // カメラは固定
-  let minRadius = 0.1, maxRadius = 100;
-
-  function applyOrientation() {
-    mv.orientation = qToEulerXYZDeg(orientation);
-  }
-  function applyCamera() {
-    mv.cameraOrbit = `${fixedTheta}rad ${fixedPhi}rad ${radius}m`;
-  }
-
-  mv.addEventListener('load', () => {
-    // 初期カメラ位置を数値として取得し、以後は radius のみ変化させる
-    const parsed = parseCameraOrbit(mv.cameraOrbit);
-    fixedTheta = parsed.theta;
-    fixedPhi = parsed.phi;
-    radius = parsed.radius;
-    initialRadius = parsed.radius;
-    minRadius = radius * 0.25;
-    maxRadius = radius * 4;
-    applyCamera();
-    overlay.classList.add('hidden');
-  });
+  mv.addEventListener('load', () => overlay.classList.add('hidden'));
   mv.addEventListener('error', () => {
     overlay.innerHTML = '<p style="color:var(--highlight);padding:16px;text-align:center">⚠️ モデルの読み込みに失敗しました。<br>GLBファイルがHTMLと同じフォルダにあるか確認してください。</p>';
   });
 
-  function parseCameraOrbit(str) {
-    // 例: "0.0032rad 1.4996rad 2.184m" / "0deg 75deg 3m" 両対応
-    const parts = str.trim().split(/\s+/);
-    const parseAngle = p => {
-      if (p.endsWith('rad')) return parseFloat(p);
-      if (p.endsWith('deg')) return parseFloat(p) * Math.PI / 180;
-      return parseFloat(p);
-    };
-    const parseDist = p => {
-      if (p.endsWith('m')) return parseFloat(p);
-      return parseFloat(p) || 2;
-    };
-    return {
-      theta: parseAngle(parts[0]),
-      phi: parseAngle(parts[1]),
-      radius: parseDist(parts[2]),
-    };
-  }
-
-  /* ── ドラッグで自由回転 ── */
-  let dragging = false;
-  let lastX = 0, lastY = 0;
-  let wasAutoRotating = false;
-  const ROT_SPEED = 0.008;
-
-  mv.addEventListener('pointerdown', (e) => {
-    dragging = true;
-    lastX = e.clientX; lastY = e.clientY;
-    wasAutoRotating = autoRotateEnabled;
-    autoRotateEnabled = false;
-    mv.setPointerCapture(e.pointerId);
-  });
-  mv.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
-    const dx = e.clientX - lastX;
-    const dy = e.clientY - lastY;
-    lastX = e.clientX; lastY = e.clientY;
-    const angleY = -dx * ROT_SPEED; // 水平ドラッグ→縦軸回転
-    const angleX = -dy * ROT_SPEED; // 垂直ドラッグ→横軸回転
-    const dq = qMul(qFromAxisAngle(AXIS_X, angleX), qFromAxisAngle(AXIS_Y, angleY));
-    orientation = qNormalize(qMul(dq, orientation));
-    applyOrientation();
-  });
-  function endDrag(e) {
-    if (!dragging) return;
-    dragging = false;
-    if (wasAutoRotating) {
-      autoRotateEnabled = true;
-      document.getElementById('btn-rotate').classList.add('active');
-    }
-  }
-  mv.addEventListener('pointerup', endDrag);
-  mv.addEventListener('pointercancel', endDrag);
-
-  /* ── ホイール / ピンチでズーム ── */
-  mv.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    if (radius == null) return;
-    radius *= (1 + e.deltaY * 0.0012);
-    radius = Math.max(minRadius, Math.min(maxRadius, radius));
-    applyCamera();
-  }, { passive: false });
-
-  const activePointers = new Map();
-  let pinchStartDist = null;
-  let pinchStartRadius = null;
-  mv.addEventListener('pointerdown', (e) => {
-    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-  });
-  mv.addEventListener('pointermove', (e) => {
-    if (!activePointers.has(e.pointerId)) return;
-    activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    if (activePointers.size === 2) {
-      const pts = [...activePointers.values()];
-      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
-      if (pinchStartDist == null) {
-        pinchStartDist = dist;
-        pinchStartRadius = radius;
-      } else if (radius != null) {
-        radius = pinchStartRadius * (pinchStartDist / dist);
-        radius = Math.max(minRadius, Math.min(maxRadius, radius));
-        applyCamera();
-      }
-    }
-  });
-  function clearPointer(e) {
-    activePointers.delete(e.pointerId);
-    if (activePointers.size < 2) { pinchStartDist = null; pinchStartRadius = null; }
-  }
-  mv.addEventListener('pointerup', clearPointer);
-  mv.addEventListener('pointercancel', clearPointer);
-
-  /* ── 自動回転(モデル自体を回す) ── */
-  let autoRotateEnabled = true;
-  let lastFrameTime = performance.now();
-  const AUTO_SPEED = 0.35; // rad/sec
-
-  function animate(now) {
-    const dt = (now - lastFrameTime) / 1000;
-    lastFrameTime = now;
-    if (autoRotateEnabled && !dragging) {
-      const dq = qFromAxisAngle(AXIS_Y, AUTO_SPEED * dt);
-      orientation = qNormalize(qMul(dq, orientation));
-      applyOrientation();
-    }
-    requestAnimationFrame(animate);
-  }
-  requestAnimationFrame(animate);
-
-  /* ── ボタン操作 ── */
   function toggleRotate() {
-    autoRotateEnabled = !autoRotateEnabled;
-    document.getElementById('btn-rotate').classList.toggle('active', autoRotateEnabled);
+    autoRotate = !autoRotate;
+    mv.autoRotate = autoRotate;
+    document.getElementById('btn-rotate').classList.toggle('active', autoRotate);
   }
-  function resetView() {
-    orientation = { x: 0, y: 0, z: 0, w: 1 };
-    applyOrientation();
-    if (initialRadius != null) {
-      radius = initialRadius;
-      applyCamera();
-    }
+  function resetCamera() {
+    mv.cameraOrbit = 'auto auto auto';
+    mv.cameraTarget = 'auto auto auto';
+    mv.fieldOfView = 'auto';
   }
-  let envIndex = 0;
-  const envs = ['neutral', 'legacy', 'commerce'];
   function cycleEnv() {
     envIndex = (envIndex + 1) % envs.length;
     mv.environmentImage = envs[envIndex];
