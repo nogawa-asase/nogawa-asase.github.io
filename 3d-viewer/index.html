@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>3D モデルビューア</title>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+  :root {
+    --bg: #1a1a2e;
+    --surface: #16213e;
+    --accent: #0f3460;
+    --highlight: #e94560;
+    --text: #eaeaea;
+    --muted: #aaa;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f0f4f8; --surface: #fff; --accent: #e2e8f0;
+      --highlight: #3b82f6; --text: #1a202c; --muted: #718096;
+    }
+  }
+  * { box-sizing: inherit; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px;
+    gap: 14px;
+    min-height: 100%;
+  }
+
+  h1 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+
+  #viewer-container {
+    width: 100%;
+    max-width: 720px;
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  model-viewer {
+    width: 100%;
+    height: 75vw;
+    max-height: 560px;
+    min-height: 300px;
+    --progress-bar-color: var(--highlight);
+  }
+
+  /* ローディング */
+  #loading-overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: var(--surface);
+    gap: 14px;
+    transition: opacity 0.6s;
+    z-index: 10;
+  }
+  #loading-overlay.hidden { opacity: 0; pointer-events: none; }
+  .spinner {
+    width: 48px; height: 48px;
+    border: 3px solid var(--accent);
+    border-top-color: var(--highlight);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  #loading-overlay p { font-size: 0.85rem; color: var(--muted); }
+
+  /* コントロール */
+  #controls {
+    width: 100%; max-width: 720px;
+    display: flex; flex-wrap: wrap;
+    gap: 8px; justify-content: center;
+  }
+  button {
+    padding: 8px 20px;
+    border-radius: 20px; border: none;
+    background: var(--surface); color: var(--text);
+    font-size: 0.85rem; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: background 0.2s, transform 0.1s;
+  }
+  button:hover { background: var(--highlight); color: #fff; transform: scale(1.04); }
+  button.active { background: var(--highlight); color: #fff; }
+
+  .hint { font-size: 0.75rem; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>🔍 3D モデルビューア</h1>
+
+<div id="viewer-container">
+  <div id="loading-overlay">
+    <div class="spinner"></div>
+    <p>モデルを読み込み中…</p>
+  </div>
+  <model-viewer
+    id="mv"
+    src="Scaniverse_2026-05-03_145529.glb"
+    alt="3D スキャンモデル"
+    camera-controls
+    touch-action="pan-y"
+    auto-rotate
+    auto-rotate-delay="1000"
+    rotation-per-second="18deg"
+    environment-image="neutral"
+    shadow-intensity="1.2"
+    exposure="1.0"
+  ></model-viewer>
+</div>
+
+<div id="controls">
+  <button id="btn-rotate" class="active" onclick="toggleRotate()">⟳ 自動回転</button>
+  <button onclick="resetCamera()">🎯 リセット</button>
+  <button onclick="cycleEnv()">💡 照明切替</button>
+</div>
+<p class="hint">ドラッグで回転 ・ ピンチで拡大縮小 ・ 右クリックドラッグでパン</p>
+
+<script>
+  const mv = document.getElementById('mv');
+  const overlay = document.getElementById('loading-overlay');
+  let autoRotate = true;
+  let envIndex = 0;
+  const envs = ['neutral', 'legacy', 'commerce'];
+
+  mv.addEventListener('load', () => overlay.classList.add('hidden'));
+  mv.addEventListener('error', () => {
+    overlay.innerHTML = '<p style="color:var(--highlight);padding:16px;text-align:center">⚠️ モデルの読み込みに失敗しました。<br>GLBファイルがHTMLと同じフォルダにあるか確認してください。</p>';
+  });
+
+  function toggleRotate() {
+    autoRotate = !autoRotate;
+    mv.autoRotate = autoRotate;
+    document.getElementById('btn-rotate').classList.toggle('active', autoRotate);
+  }
+  function resetCamera() {
+    mv.cameraOrbit = 'auto auto auto';
+    mv.cameraTarget = 'auto auto auto';
+    mv.fieldOfView = 'auto';
+  }
+  function cycleEnv() {
+    envIndex = (envIndex + 1) % envs.length;
+    mv.environmentImage = envs[envIndex];
+  }
+</script>
+
+</body>
+</html>
