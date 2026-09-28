@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>3D モデルビューア</title>
+<title>3D 作品ギャラリー</title>
 <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 <style>
   :root {
@@ -25,113 +25,247 @@
   }
   * { box-sizing: inherit; margin: 0; padding: 0; }
   html, body {
-    height: 100%;
+    min-height: 100%;
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
-  body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 16px;
-    gap: 14px;
-    min-height: 100%;
-  }
-  h1 { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.05em; }
+  body { padding: 24px 16px 48px; }
 
-  #viewer-container {
-    width: 100%; max-width: 720px;
+  h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  /* ── ギャラリーグリッド ── */
+  #gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .card {
     background: var(--surface);
-    border-radius: 16px; overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .card:hover, .card:active {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  }
+  .card .thumb {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
     position: relative;
   }
-  model-viewer {
+  .card .thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .card .thumb .fallback-icon {
+    font-size: 2.4rem;
+    opacity: 0.5;
+  }
+  .card .thumb .badge {
+    position: absolute; bottom: 6px; right: 6px;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+  .card .title {
+    padding: 8px 10px 10px;
+    font-size: 0.82rem;
+    text-align: center;
+  }
+
+  /* ── モーダル ── */
+  #modal-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 100;
+    align-items: center; justify-content: center;
+    padding: 16px;
+    padding-top: calc(16px + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+  #modal-backdrop.open { display: flex; }
+
+  #modal {
+    width: 100%; max-width: 720px;
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column;
+  }
+  #modal-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+  }
+  #modal-title { font-size: 0.95rem; font-weight: 600; }
+  #modal-close {
+    background: none; border: none; color: var(--text);
+    font-size: 1.4rem; cursor: pointer; line-height: 1;
+    padding: 4px 8px; border-radius: 8px;
+  }
+  #modal-close:hover { background: var(--highlight); color: #fff; }
+
+  #modal-viewer-wrap { position: relative; }
+  #modal-mv {
     width: 100%;
     height: 75vw;
-    max-height: 560px;
-    min-height: 300px;
+    max-height: 520px;
+    min-height: 280px;
     --progress-bar-color: var(--highlight);
+    display: block;
   }
-  #loading-overlay {
+  #modal-loading {
     position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    background: var(--surface); gap: 14px;
-    transition: opacity 0.6s; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--surface); gap: 12px;
+    transition: opacity 0.5s;
   }
-  #loading-overlay.hidden { opacity: 0; pointer-events: none; }
+  #modal-loading.hidden { opacity: 0; pointer-events: none; }
   .spinner {
-    width: 48px; height: 48px;
+    width: 42px; height: 42px;
     border: 3px solid var(--accent);
     border-top-color: var(--highlight);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  #loading-overlay p { font-size: 0.85rem; color: var(--muted); }
 
-  #controls {
-    width: 100%; max-width: 720px;
+  #modal-controls {
     display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    padding: 12px 16px 16px;
   }
-  button {
-    padding: 8px 20px; border-radius: 20px; border: none;
-    background: var(--surface); color: var(--text);
-    font-size: 0.85rem; cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    transition: background 0.2s, transform 0.1s;
+  #modal-controls button {
+    padding: 7px 16px; border-radius: 20px; border: none;
+    background: var(--accent); color: var(--text);
+    font-size: 0.8rem; cursor: pointer;
   }
-  button:hover { background: var(--highlight); color: #fff; transform: scale(1.04); }
-  button.active { background: var(--highlight); color: #fff; }
-  .hint { font-size: 0.75rem; color: var(--muted); text-align: center; }
+  #modal-controls button.active { background: var(--highlight); color: #fff; }
+  #modal-controls button:hover { background: var(--highlight); color: #fff; }
 </style>
 </head>
 <body>
 
-<h1>🔍 3D モデルビューア</h1>
+<h1>🗂️ 3D 作品ギャラリー</h1>
 
-<div id="viewer-container">
-  <div id="loading-overlay">
-    <div class="spinner"></div>
-    <p>モデルを読み込み中…</p>
+<div id="gallery"></div>
+
+<!-- モーダル -->
+<div id="modal-backdrop" onclick="if(event.target===this) closeModal()">
+  <div id="modal">
+    <div id="modal-header">
+      <span id="modal-title"></span>
+      <button id="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-viewer-wrap">
+      <div id="modal-loading">
+        <div class="spinner"></div>
+        <span style="font-size:0.8rem;color:var(--muted)">読み込み中…</span>
+      </div>
+      <model-viewer
+        id="modal-mv"
+        camera-controls
+        touch-action="pan-y"
+        auto-rotate
+        auto-rotate-delay="1000"
+        rotation-per-second="18deg"
+        environment-image="neutral"
+        shadow-intensity="1.2"
+        exposure="1.0"
+        min-camera-orbit="auto -Infinitydeg auto"
+        max-camera-orbit="auto Infinitydeg auto"
+        interpolation-decay="200"
+      ></model-viewer>
+    </div>
+    <div id="modal-controls">
+      <button id="btn-rotate" class="active" onclick="toggleRotate()">⟳ 自動回転</button>
+      <button onclick="resetCamera()">🎯 リセット</button>
+      <button onclick="cycleEnv()">💡 照明切替</button>
+    </div>
   </div>
-  <model-viewer
-    id="mv"
-    src="Scaniverse_2026-05-03_145529.glb"
-    alt="3D スキャンモデル"
-    camera-controls
-    touch-action="pan-y"
-    auto-rotate
-    auto-rotate-delay="1000"
-    rotation-per-second="18deg"
-    environment-image="neutral"
-    shadow-intensity="1.2"
-    exposure="1.0"
-    min-camera-orbit="auto -Infinitydeg auto"
-    max-camera-orbit="auto Infinitydeg auto"
-    interpolation-decay="200"
-  ></model-viewer>
 </div>
-
-<div id="controls">
-  <button id="btn-rotate" class="active" onclick="toggleRotate()">⟳ 自動回転</button>
-  <button onclick="resetCamera()">🎯 リセット</button>
-  <button onclick="cycleEnv()">💡 照明切替</button>
-</div>
-<p class="hint">ドラッグで回転 ・ ピンチで拡大縮小 ・ 右クリックドラッグでパン</p>
 
 <script>
-  const mv = document.getElementById('mv');
-  const overlay = document.getElementById('loading-overlay');
+  /* ═══════════════════════════════════════════════
+     作品リスト。ここに10個分を追加してください。
+     name    : ギャラリーに表示する作品名
+     glb     : models/ フォルダ内のGLBファイル名
+     poster  : posters/ フォルダ内のサムネイル画像名
+     ═══════════════════════════════════════════════ */
+  const ITEMS = [
+    { name: "作品 01", glb: "models/work01.glb", poster: "posters/work01.jpg" },
+    { name: "作品 02", glb: "models/work02.glb", poster: "posters/work02.jpg" },
+    { name: "作品 03", glb: "models/work03.glb", poster: "posters/work03.jpg" },
+    { name: "作品 04", glb: "models/work04.glb", poster: "posters/work04.jpg" },
+    { name: "作品 05", glb: "models/work05.glb", poster: "posters/work05.jpg" },
+    { name: "作品 06", glb: "models/work06.glb", poster: "posters/work06.jpg" },
+    { name: "作品 07", glb: "models/work07.glb", poster: "posters/work07.jpg" },
+    { name: "作品 08", glb: "models/work08.glb", poster: "posters/work08.jpg" },
+    { name: "作品 09", glb: "models/work09.glb", poster: "posters/work09.jpg" },
+    { name: "作品 10", glb: "models/work10.glb", poster: "posters/work10.jpg" },
+  ];
+
+  const gallery = document.getElementById('gallery');
+  ITEMS.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.onclick = () => openModal(item);
+    card.innerHTML = `
+      <div class="thumb">
+        <img src="${item.poster}" alt="${item.name}"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <div class="fallback-icon" style="display:none; position:absolute; inset:0; align-items:center; justify-content:center;">📦</div>
+        <span class="badge">3D</span>
+      </div>
+      <div class="title">${item.name}</div>
+    `;
+    gallery.appendChild(card);
+  });
+
+  /* ── モーダル制御 ── */
+  const backdrop = document.getElementById('modal-backdrop');
+  const mv = document.getElementById('modal-mv');
+  const loading = document.getElementById('modal-loading');
+  const titleEl = document.getElementById('modal-title');
   let autoRotate = true;
   let envIndex = 0;
   const envs = ['neutral', 'legacy', 'commerce'];
 
-  mv.addEventListener('load', () => overlay.classList.add('hidden'));
+  function openModal(item) {
+    titleEl.textContent = item.name;
+    loading.classList.remove('hidden');
+    mv.src = item.glb;
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    backdrop.classList.remove('open');
+    mv.src = '';               // メモリ解放のため読み込みを止める
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  mv.addEventListener('load', () => loading.classList.add('hidden'));
   mv.addEventListener('error', () => {
-    overlay.innerHTML = '<p style="color:var(--highlight);padding:16px;text-align:center">⚠️ モデルの読み込みに失敗しました。<br>GLBファイルがHTMLと同じフォルダにあるか確認してください。</p>';
+    loading.innerHTML = '<p style="color:var(--highlight);font-size:0.85rem;padding:12px;text-align:center">⚠️ 読み込みに失敗しました</p>';
   });
 
   function toggleRotate() {
