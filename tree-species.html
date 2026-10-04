@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>樹種コピーリスト</title>
+  <style>
+    :root {
+      --bg: #fafaf7;
+      --fg: #1d2a1f;
+      --sub: #46544a;
+      --muted: #707c70;
+      --card: #ffffff;
+      --line: #d9e0d4;
+      --accent: #2e7d32;
+      --accent-bg: #e3f1e3;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121612;
+        --fg: #e8efe8;
+        --sub: #b6c4b6;
+        --muted: #8f9d8f;
+        --card: #1b221b;
+        --line: #2b362b;
+        --accent: #7fd085;
+        --accent-bg: #243524;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.5 system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 12px 14px 10px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+    h1 { margin: 0 0 2px; font-size: 1.15rem; }
+    .lead { margin: 0 0 8px; font-size: 0.8rem; color: var(--muted); }
+    input[type="search"] {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 16px; /* iOS でズームされない大きさ */
+      color: var(--fg);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 0.85rem;
+    }
+    .options label { display: flex; align-items: center; gap: 6px; }
+    .options input { width: 18px; height: 18px; accent-color: var(--accent); }
+    #total { color: var(--muted); }
+
+    ul { list-style: none; margin: 0; padding: 6px 12px 12px; }
+
+    /* 1種類 = 1枚のカード。上段が和名、下段が学名 */
+    .card {
+      margin: 10px 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .lines { display: flex; flex-direction: column; min-width: 0; }
+    .line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      width: 100%;
+      min-height: 46px;
+      padding: 9px 4px 9px 14px;
+      font: inherit;
+      color: var(--fg);
+      text-align: left;
+      background: transparent;
+      border: 0;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+    }
+    .line + .line { border-top: 1px dashed var(--line); }
+    .line.ja { font-size: 1.1rem; font-weight: 600; }
+    .line.sci { font-style: italic; color: var(--sub); word-break: break-word; }
+    .line:active, .line.done { background: var(--accent-bg); }
+    .copy-icon { flex: none; width: 16px; height: 16px; margin-right: 8px; color: var(--muted); opacity: 0.7; }
+    .line.done .copy-icon { color: var(--accent); opacity: 1; }
+    .kind {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 0 6px;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      vertical-align: middle;
+    }
+    .count {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 0 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border-radius: 999px;
+      vertical-align: middle;
+    }
+    .count:empty { display: none; }
+    .note {
+      padding: 6px 14px 8px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .empty { padding: 24px 14px; color: var(--muted); text-align: center; }
+
+    footer {
+      padding: 4px 14px 90px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    footer p { margin: 0 0 10px; }
+    #reset {
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      max-width: 90%;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      color: #fff;
+      background: rgba(30, 30, 30, 0.92);
+      border-radius: 999px;
+      transform: translateX(-50%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    #toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>樹種コピーリスト</h1>
+    <p class="lead">和名・学名のどちらも、タップでコピーします。よく使う木ほど上に並びます。</p>
+    <input id="search" type="search" placeholder="和名または学名で探す" autocomplete="off" aria-label="検索">
+    <div class="options">
+      <label><input id="showAll" type="checkbox"> 低木・つる・笹も表示</label>
+      <span id="total"></span>
+    </div>
+  </header>
+
+  <ul id="list"></ul>
+
+  <footer>
+    <p>学名は目安です。「要確認」のある行や、亜種・変種・園芸種は、登録前に確認してください。</p>
+    <p>コピー回数は、この端末のこのブラウザの中にだけ保存されます。並び順は、ページを開いたとき、または戻ってきたときに更新されます。同じ行の学名と和名を3分以内に続けてコピーしても、1回として数えます。</p>
+    <button id="reset" type="button">コピー回数をリセット</button>
+  </footer>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // [和名, 学名, 種類(t=木 / s=低木 / v=つる / o=その他), 備考]
+    const SPECIES = [
+      ["アカマツ", "Pinus densiflora", "t", ""],
+      ["スギ", "Cryptomeria japonica", "t", ""],
+      ["サワラ", "Chamaecyparis pisifera", "t", ""],
+      ["ヒノキ", "Chamaecyparis obtusa", "t", ""],
+      ["アカシデ", "Carpinus laxiflora", "t", ""],
+      ["イヌシデ", "Carpinus tschonoskii", "t", ""],
+      ["クマシデ", "Carpinus japonica", "t", ""],
+      ["クヌギ", "Quercus acutissima", "t", ""],
+      ["コナラ", "Quercus serrata", "t", ""],
+      ["シラカシ", "Quercus myrsinifolia", "t", ""],
+      ["クリ", "Castanea crenata", "t", ""],
+      ["エノキ", "Celtis sinensis", "t", ""],
+      ["ケヤキ", "Zelkova serrata", "t", ""],
+      ["ムクノキ", "Aphananthe aspera", "t", ""],
+      ["ヒメコウゾ", "Broussonetia kazinoki", "s", ""],
+      ["ヤマグワ", "Morus australis", "t", ""],
+      ["コブシ", "Magnolia kobus", "t", ""],
+      ["サネカズラ(ビナンカズラ)", "Kadsura japonica", "v", ""],
+      ["クロモジ", "Lindera umbellata", "s", ""],
+      ["シロダモ", "Neolitsea sericea", "t", ""],
+      ["ヤマコウバシ", "Lindera glauca", "s", ""],
+      ["ナンテン", "Nandina domestica", "s", ""],
+      ["ヒイラギナンテン", "Berberis japonica", "s", "旧属名 Mahonia japonica"],
+      ["アケビ", "Akebia quinata", "v", ""],
+      ["サザンカ", "Camellia sasanqua", "t", ""],
+      ["シロバナヤブツバキ", "Camellia japonica", "t", "品種(f. alba)。種名は Camellia japonica"],
+      ["チャノキ", "Camellia sinensis", "s", ""],
+      ["ツバキ園芸種", "Camellia japonica", "t", "園芸品種。種名は Camellia japonica"],
+      ["ヒサカキ", "Eurya japonica", "s", ""],
+      ["ヤブツバキ", "Camellia japonica", "t", ""],
+      ["アジサイ", "Hydrangea macrophylla", "s", ""],
+      ["エゾアジサイ", "Hydrangea serrata", "s", "変種(var. megacarpa)。要確認"],
+      ["ガクアジサイ", "Hydrangea macrophylla", "s", "品種(f. normalis)"],
+      ["ヤマアジサイ", "Hydrangea serrata", "s", ""],
+      ["イヌザクラ", "Prunus buergeriana", "t", ""],
+      ["ウメ園芸種", "Prunus mume", "t", "園芸品種"],
+      ["ウワミズザクラ", "Prunus grayana", "t", ""],
+      ["カマツカ", "Pourthiaea villosa", "s", "旧名 Photinia villosa"],
+      ["クサイチゴ", "Rubus hirsutus", "s", ""],
+      ["クサボケ", "Chaenomeles japonica", "s", ""],
+      ["コゴメウツギ", "Stephanandra incisa", "s", ""],
+      ["サトザクラ(カンザン)", "Prunus serrulata", "t", "園芸品種群。Prunus 属で書く例が多い"],
+      ["シロヤマブキ", "Rhodotypos scandens", "s", ""],
+      ["ソメイヨシノ", "Prunus × yedoensis", "t", "交雑種(×)"],
+      ["ナワシロイチゴ", "Rubus parvifolius", "s", ""],
+      ["ノイバラ", "Rosa multiflora", "s", ""],
+      ["モミジイチゴ(キイチゴ)", "Rubus palmatus", "s", "変種(var. coptophyllus)"],
+      ["ヤエヤマブキ", "Kerria japonica", "s", "品種(f. pleniflora)"],
+      ["ヤマザクラ", "Prunus jamasakura", "t", ""],
+      ["ヤマブキ", "Kerria japonica", "s", ""],
+      ["ミヤギノハギ", "Lespedeza thunbergii", "s", ""],
+      ["アカメガシワ", "Mallotus japonicus", "t", ""],
+      ["サンショウ", "Zanthoxylum piperitum", "s", ""],
+      ["ニガキ", "Picrasma quassioides", "t", ""],
+      ["イタヤカエデ", "Acer pictum", "t", "Acer mono とされることもある"],
+      ["オニイタヤ", "Acer pictum", "t", "イタヤカエデの変種。要確認"],
+      ["イヌツゲ", "Ilex crenata", "s", ""],
+      ["コマユミ", "Euonymus alatus", "s", "ニシキギの品種(f. striatus)"],
+      ["ニシキギ", "Euonymus alatus", "s", ""],
+      ["マユミ", "Euonymus hamiltonianus", "t", ""],
+      ["ゴンズイ", "Euscaphis japonica", "t", ""],
+      ["エビヅル", "Vitis ficifolia", "v", ""],
+      ["ツルグミ", "Elaeagnus glabra", "s", ""],
+      ["アオキ", "Aucuba japonica", "s", ""],
+      ["クマノミズキ", "Cornus macrophylla", "t", ""],
+      ["ミズキ", "Cornus controversa", "t", ""],
+      ["ヤマボウシ", "Cornus kousa", "t", ""],
+      ["キヅタ", "Hedera rhombea", "v", ""],
+      ["メダラ", "Aralia elata", "s", "タラノキの品種。要確認"],
+      ["ヤツデ", "Fatsia japonica", "s", ""],
+      ["アセビ", "Pieris japonica", "s", ""],
+      ["オオムラサキ", "Rhododendron × pulchrum", "s", "ツツジの園芸品種。要確認"],
+      ["キリシマツツジ", "Rhododendron × obtusum", "s", "要確認"],
+      ["サツキ", "Rhododendron indicum", "s", ""],
+      ["ツツジ園芸種", "Rhododendron", "s", "属名のみ(園芸種)"],
+      ["マンリョウ", "Ardisia crenata", "s", ""],
+      ["ヤブコウジ", "Ardisia japonica", "s", ""],
+      ["エゴノキ", "Styrax japonicus", "t", ""],
+      ["ハクウンボク", "Styrax obassia", "t", ""],
+      ["サワフタギ", "Symplocos sawafutagi", "s", "Symplocos coreana とされることもある"],
+      ["ツルニチニチソウ", "Vinca major", "v", "Vinca minor の場合もある。要確認"],
+      ["テイカカズラ", "Trachelospermum asiaticum", "v", ""],
+      ["トウネズミモチ", "Ligustrum lucidum", "t", ""],
+      ["ネズミモチ", "Ligustrum japonicum", "t", ""],
+      ["クサギ", "Clerodendrum trichotomum", "s", ""],
+      ["コムラサキ", "Callicarpa dichotoma", "s", ""],
+      ["ムラサキシキブ", "Callicarpa japonica", "s", ""],
+      ["ウグイスカグラ", "Lonicera gracilipes", "s", ""],
+      ["ガマズミ", "Viburnum dilatatum", "s", ""],
+      ["サンゴジュ", "Viburnum odoratissimum", "t", "変種(var. awabuki)"],
+      ["スイカズラ", "Lonicera japonica", "v", ""],
+      ["ニワトコ", "Sambucus racemosa", "s", "亜種(subsp. sieboldiana)"],
+      ["ハナゾノツクバネウツギ", "Abelia × grandiflora", "s", ""],
+      ["コウヤボウキ", "Pertya scandens", "s", ""],
+      ["サルトリイバラ", "Smilax china", "v", ""],
+      ["シオデ", "Smilax riparia", "v", "変種あり。要確認"],
+      ["アズマネザサ", "Pleioblastus chino", "o", "笹(ササ類)"],
+      ["シュロ", "Trachycarpus fortunei", "t", "ヤシ科"],
+
+      ["イチョウ", "Ginkgo biloba", "t", ""],
+      ["クスノキ", "Cinnamomum camphora", "t", ""],
+      ["マテバシイ", "Lithocarpus edulis", "t", ""],
+      ["スダジイ", "Castanopsis sieboldii", "t", ""],
+      ["アラカシ", "Quercus glauca", "t", ""],
+      ["ウバメガシ", "Quercus phillyreoides", "t", ""],
+      ["カシワ", "Quercus dentata", "t", ""],
+      ["ミズナラ", "Quercus crispula", "t", "Quercus mongolica の亜種とされることもある"],
+      ["キンモクセイ", "Osmanthus fragrans var. aurantiacus", "t", "変種名まで入れた形"],
+      ["ハナミズキ", "Cornus florida", "t", ""],
+      ["サルスベリ", "Lagerstroemia indica", "t", ""],
+      ["プラタナス(モミジバスズカケノキ)", "Platanus × acerifolia", "t", "交雑種(×)"],
+      ["ユリノキ", "Liriodendron tulipifera", "t", ""],
+      ["モミジバフウ", "Liquidambar styraciflua", "t", ""],
+      ["トウカエデ", "Acer buergerianum", "t", ""],
+      ["イロハモミジ", "Acer palmatum", "t", ""],
+      ["ナンキンハゼ", "Triadica sebifera", "t", ""],
+      ["トチノキ", "Aesculus turbinata", "t", ""],
+      ["ベニバナトチノキ", "Aesculus × carnea", "t", "交雑種(×)"],
+      ["セイヨウトチノキ(マロニエ)", "Aesculus hippocastanum", "t", ""],
+      ["メタセコイア", "Metasequoia glyptostroboides", "t", ""],
+      ["ラクウショウ", "Taxodium distichum", "t", ""],
+      ["ヒマラヤスギ", "Cedrus deodara", "t", ""],
+      ["クロマツ", "Pinus thunbergii", "t", ""],
+      ["カイヅカイブキ", "Juniperus chinensis", "t", "園芸品種('Kaizuka')。種名は Juniperus chinensis"],
+      ["イヌマキ", "Podocarpus macrophyllus", "t", ""],
+      ["モチノキ", "Ilex integra", "t", ""],
+      ["クロガネモチ", "Ilex rotunda", "t", ""],
+      ["ソヨゴ", "Ilex pedunculosa", "t", ""],
+      ["モッコク", "Ternstroemia gymnanthera", "t", ""],
+      ["タブノキ", "Machilus thunbergii", "t", "Persea thunbergii とされることもある"],
+      ["カツラ", "Cercidiphyllum japonicum", "t", ""],
+      ["ハクモクレン", "Magnolia denudata", "t", ""],
+      ["タイサンボク", "Magnolia grandiflora", "t", ""],
+      ["ホオノキ", "Magnolia obovata", "t", ""],
+      ["ハナモモ", "Prunus persica", "t", "園芸品種"],
+      ["カワヅザクラ", "Prunus × kanzakura", "t", "交雑種(×)。要確認"],
+      ["オオシマザクラ", "Prunus speciosa", "t", ""],
+      ["エドヒガン", "Prunus pendula", "t", "変種(f. ascendens)。Prunus itosakura とされることもある"],
+      ["カンヒザクラ", "Prunus campanulata", "t", ""],
+      ["カキノキ", "Diospyros kaki", "t", ""],
+      ["ビワ", "Eriobotrya japonica", "t", ""],
+      ["ザクロ", "Punica granatum", "t", ""],
+      ["ヤマモモ", "Morella rubra", "t", "Myrica rubra とされることもある"],
+      ["オリーブ", "Olea europaea", "t", ""],
+      ["シマトネリコ", "Fraxinus griffithii", "t", ""],
+      ["アキニレ", "Ulmus parvifolia", "t", ""],
+      ["ムクロジ", "Sapindus mukorossi", "t", ""],
+      ["センダン", "Melia azedarach", "t", ""],
+      ["アオギリ", "Firmiana simplex", "t", ""],
+      ["ネムノキ", "Albizia julibrissin", "t", ""],
+      ["エンジュ", "Styphnolobium japonicum", "t", "Sophora japonica とされることもある"],
+      ["ハリエンジュ(ニセアカシア)", "Robinia pseudoacacia", "t", ""],
+      ["ポプラ(セイヨウハコヤナギ)", "Populus nigra", "t", "園芸品種('Italica')。種名は Populus nigra"],
+      ["シダレヤナギ", "Salix babylonica", "t", ""],
+      ["カナリーヤシ", "Phoenix canariensis", "t", "ヤシ科"]
+    ];
+
+    const KIND_LABEL = { s: "低木", v: "つる", o: "その他" };
+    const STORAGE_KEY = "treeSpeciesCopyCounts.v1";
+    const DUPLICATE_WINDOW_MS = 3 * 60 * 1000;
+
+    const listEl = document.getElementById("list");
+    const searchEl = document.getElementById("search");
+    const showAllEl = document.getElementById("showAll");
+    const totalEl = document.getElementById("total");
+    const toastEl = document.getElementById("toast");
+    const collator = new Intl.Collator("ja");
+    const lastTap = {};
+    let toastTimer = null;
+
+    // ---- コピー回数の保存 ----
+    function loadCounts() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      } catch (e) {
+        return {};
+      }
+    }
+    function saveCounts(counts) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(counts));
+      } catch (e) { /* 保存できなくても、コピー自体は動かす */ }
+    }
+
+    // ---- 検索用:ひらがなをカタカナにそろえる ----
+    function toKatakana(str) {
+      return str.replace(/[\u3041-\u3096]/g, c =>
+        String.fromCharCode(c.charCodeAt(0) + 0x60));
+    }
+
+    // ---- クリップボードへのコピー ----
+    async function copyText(text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      } catch (e) { /* 下の代替方法を試す */ }
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, text.length);
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      return ok;
+    }
+
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1600);
+    }
+
+    // ---- 表示 ----
+    const COPY_ICON = '<svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V6a2 2 0 0 1 2-2h9"></path></svg>';
+
+    function makeLine(cls, label, text, tagText) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "line " + cls;
+      btn.dataset.copy = text;
+      btn.dataset.label = label;
+      btn.setAttribute("aria-label", label + "をコピー: " + text);
+      const span = document.createElement("span");
+      span.textContent = text;
+      if (tagText) {
+        const tag = document.createElement("span");
+        tag.className = "kind";
+        tag.textContent = tagText;
+        span.appendChild(tag);
+      }
+      btn.appendChild(span);
+      btn.insertAdjacentHTML("beforeend", COPY_ICON);
+      return btn;
+    }
+
+    function render() {
+      const counts = loadCounts();
+      const query = toKatakana(searchEl.value.trim()).toLowerCase();
+      const showAll = showAllEl.checked;
+
+      // 検索中は、木以外も含めて全体から探す
+      const items = SPECIES.filter(s => {
+        if (query) {
+          return toKatakana(s[0]).includes(query) || s[1].toLowerCase().includes(query);
+        }
+        return showAll || s[2] === "t";
+      });
+
+      items.sort((a, b) =>
+        (counts[b[0]] || 0) - (counts[a[0]] || 0) || collator.compare(a[0], b[0]));
+
+      listEl.innerHTML = "";
+      totalEl.textContent = items.length + "件";
+
+      if (items.length === 0) {
+        const li = document.createElement("li");
+        li.className = "empty";
+        li.textContent = "見つかりませんでした";
+        listEl.appendChild(li);
+        return;
+      }
+
+      items.forEach(([ja, sci, kind, note]) => {
+        const li = document.createElement("li");
+        li.className = "card";
+        li.dataset.id = ja;
+
+        const lines = document.createElement("div");
+        lines.className = "lines";
+        lines.append(
+          makeLine("ja", "和名", ja, KIND_LABEL[kind]),
+          makeLine("sci", "学名", sci)
+        );
+
+        const count = document.createElement("span");
+        const n = counts[ja] || 0;
+        count.className = "count";
+        count.textContent = n > 0 ? n + "回" : "";
+        lines.querySelector(".ja > span").appendChild(count);
+
+        li.appendChild(lines);
+
+        if (note) {
+          const noteEl = document.createElement("div");
+          noteEl.className = "note";
+          noteEl.textContent = note;
+          li.appendChild(noteEl);
+        }
+        listEl.appendChild(li);
+      });
+    }
+
+    // ---- タップ時:コピーして回数を数える(並べ替えはしない) ----
+    listEl.addEventListener("click", async (event) => {
+      const btn = event.target.closest("button[data-copy]");
+      if (!btn) return;
+      const row = btn.closest(".card");
+      const id = row.dataset.id;
+      const text = btn.dataset.copy;
+
+      const ok = await copyText(text);
+      if (!ok) {
+        showToast("コピーできませんでした");
+        return;
+      }
+      showToast((btn.dataset.label || "") + "をコピーしました: " + text);
+      btn.classList.add("done");
+      setTimeout(() => btn.classList.remove("done"), 400);
+
+      // 同じ行を3分以内に続けて押したときは、1回として数える
+      const now = Date.now();
+      const recent = lastTap[id] && now - lastTap[id] < DUPLICATE_WINDOW_MS;
+      lastTap[id] = now;
+      if (recent) return;
+
+      const counts = loadCounts();
+      counts[id] = (counts[id] || 0) + 1;
+      saveCounts(counts);
+
+      const badge = row.querySelector(".count");
+      badge.textContent = counts[id] + "回";
+    });
+
+    searchEl.addEventListener("input", render);
+    showAllEl.addEventListener("change", render);
+
+    // 他のアプリから戻ってきたときに、並び順を更新する
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") render();
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+      if (confirm("コピー回数をすべてリセットします。よろしいですか?")) {
+        saveCounts({});
+        Object.keys(lastTap).forEach(k => delete lastTap[k]);
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>
