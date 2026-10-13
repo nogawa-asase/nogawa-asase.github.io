@@ -2,7 +2,7 @@
   "type": "FeatureCollection",
   "generator": "overpass-turbo",
   "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
-  "timestamp": "2026-10-13T10:31:00Z",
+  "timestamp": "2026-10-13T12:10:50Z",
   "features": [
     {
       "type": "Feature",
@@ -413,19 +413,17 @@
     {
       "type": "Feature",
       "properties": {
-        "@id": "node/6817396963",
-        "name": "姥女樫",
-        "natural": "tree",
-        "religion": "shinto"
+        "@id": "node/6122921405",
+        "natural": "tree"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          139.5017351,
-          35.7061003
+          139.5296467,
+          35.665131
         ]
       },
-      "id": "node/6817396963"
+      "id": "node/6122921405"
     },
     {
       "type": "Feature",
@@ -1386,21 +1384,6 @@
         ]
       },
       "id": "node/13915721297"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "@id": "node/13969647179",
-        "natural": "tree"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          139.4817254,
-          35.7065052
-        ]
-      },
-      "id": "node/13969647179"
     },
     {
       "type": "Feature",
@@ -17270,6 +17253,2163 @@
         ]
       },
       "id": "node/14279915388"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282038",
+        "leaf_cycle": "evergreen",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Cinnamomum camphora",
+        "species:ja": "クスノキ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946723,
+          35.6691699
+        ]
+      },
+      "id": "node/14280282038"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282039",
+        "leaf_cycle": "evergreen",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Cinnamomum camphora",
+        "species:ja": "クスノキ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946844,
+          35.6692072
+        ]
+      },
+      "id": "node/14280282039"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282040",
+        "leaf_cycle": "evergreen",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Cinnamomum camphora",
+        "species:ja": "クスノキ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4947,
+          35.6692418
+        ]
+      },
+      "id": "node/14280282040"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282041",
+        "leaf_cycle": "evergreen",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Cinnamomum camphora",
+        "species:ja": "クスノキ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4947156,
+          35.6692772
+        ]
+      },
+      "id": "node/14280282041"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282042",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945283,
+          35.6696762
+        ]
+      },
+      "id": "node/14280282042"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282043",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946374,
+          35.6698674
+        ]
+      },
+      "id": "node/14280282043"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282044",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946315,
+          35.6698995
+        ]
+      },
+      "id": "node/14280282044"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282045",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946283,
+          35.6699343
+        ]
+      },
+      "id": "node/14280282045"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282046",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946243,
+          35.6699702
+        ]
+      },
+      "id": "node/14280282046"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282047",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946208,
+          35.6700078
+        ]
+      },
+      "id": "node/14280282047"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282048",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946165,
+          35.670033
+        ]
+      },
+      "id": "node/14280282048"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282049",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946173,
+          35.6700645
+        ]
+      },
+      "id": "node/14280282049"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282050",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946196,
+          35.6700976
+        ]
+      },
+      "id": "node/14280282050"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282051",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946202,
+          35.670132
+        ]
+      },
+      "id": "node/14280282051"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282052",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946131,
+          35.6701617
+        ]
+      },
+      "id": "node/14280282052"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282053",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4946056,
+          35.670197
+        ]
+      },
+      "id": "node/14280282053"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282054",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945073,
+          35.6699283
+        ]
+      },
+      "id": "node/14280282054"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282055",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945005,
+          35.6699593
+        ]
+      },
+      "id": "node/14280282055"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282056",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945057,
+          35.6699917
+        ]
+      },
+      "id": "node/14280282056"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282057",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944997,
+          35.6700233
+        ]
+      },
+      "id": "node/14280282057"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282058",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944937,
+          35.6700917
+        ]
+      },
+      "id": "node/14280282058"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282059",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944909,
+          35.6701219
+        ]
+      },
+      "id": "node/14280282059"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282060",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944861,
+          35.6701568
+        ]
+      },
+      "id": "node/14280282060"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282061",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944837,
+          35.670187
+        ]
+      },
+      "id": "node/14280282061"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282062",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944278,
+          35.6706665
+        ]
+      },
+      "id": "node/14280282062"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282063",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944201,
+          35.6707061
+        ]
+      },
+      "id": "node/14280282063"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282064",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944088,
+          35.670771
+        ]
+      },
+      "id": "node/14280282064"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282065",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944073,
+          35.6708045
+        ]
+      },
+      "id": "node/14280282065"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282066",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944021,
+          35.6708327
+        ]
+      },
+      "id": "node/14280282066"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282067",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944023,
+          35.670865
+        ]
+      },
+      "id": "node/14280282067"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282068",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943942,
+          35.670899
+        ]
+      },
+      "id": "node/14280282068"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282069",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945193,
+          35.670873
+        ]
+      },
+      "id": "node/14280282069"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282070",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945251,
+          35.6708427
+        ]
+      },
+      "id": "node/14280282070"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282071",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945285,
+          35.6708111
+        ]
+      },
+      "id": "node/14280282071"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282072",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945296,
+          35.6707763
+        ]
+      },
+      "id": "node/14280282072"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282073",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945319,
+          35.6707422
+        ]
+      },
+      "id": "node/14280282073"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282074",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945355,
+          35.670712
+        ]
+      },
+      "id": "node/14280282074"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282075",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945455,
+          35.6706773
+        ]
+      },
+      "id": "node/14280282075"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282076",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4945001,
+          35.6710659
+        ]
+      },
+      "id": "node/14280282076"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282077",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.494491,
+          35.671097
+        ]
+      },
+      "id": "node/14280282077"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282078",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944901,
+          35.6711277
+        ]
+      },
+      "id": "node/14280282078"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282079",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944806,
+          35.671161
+        ]
+      },
+      "id": "node/14280282079"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282080",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944751,
+          35.6712651
+        ]
+      },
+      "id": "node/14280282080"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282081",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944659,
+          35.6713232
+        ]
+      },
+      "id": "node/14280282081"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282082",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944605,
+          35.6713564
+        ]
+      },
+      "id": "node/14280282082"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282083",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.494459,
+          35.6713957
+        ]
+      },
+      "id": "node/14280282083"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282084",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943281,
+          35.6714784
+        ]
+      },
+      "id": "node/14280282084"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282085",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943295,
+          35.671447
+        ]
+      },
+      "id": "node/14280282085"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282086",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943407,
+          35.6713802
+        ]
+      },
+      "id": "node/14280282086"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282087",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.494339,
+          35.6713494
+        ]
+      },
+      "id": "node/14280282087"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282088",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943441,
+          35.6713152
+        ]
+      },
+      "id": "node/14280282088"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282089",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943497,
+          35.6712829
+        ]
+      },
+      "id": "node/14280282089"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282090",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943528,
+          35.6712512
+        ]
+      },
+      "id": "node/14280282090"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282091",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943536,
+          35.6712204
+        ]
+      },
+      "id": "node/14280282091"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282092",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943577,
+          35.6711847
+        ]
+      },
+      "id": "node/14280282092"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282093",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943623,
+          35.6711575
+        ]
+      },
+      "id": "node/14280282093"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282094",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943625,
+          35.6711144
+        ]
+      },
+      "id": "node/14280282094"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282095",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943694,
+          35.6710892
+        ]
+      },
+      "id": "node/14280282095"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282096",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943747,
+          35.6710611
+        ]
+      },
+      "id": "node/14280282096"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282097",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943776,
+          35.6710248
+        ]
+      },
+      "id": "node/14280282097"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282098",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944327,
+          35.6716086
+        ]
+      },
+      "id": "node/14280282098"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282099",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944332,
+          35.6716463
+        ]
+      },
+      "id": "node/14280282099"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280282100",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944266,
+          35.671679
+        ]
+      },
+      "id": "node/14280282100"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286901",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944195,
+          35.6717129
+        ]
+      },
+      "id": "node/14280286901"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286902",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944174,
+          35.6717438
+        ]
+      },
+      "id": "node/14280286902"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286903",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944356,
+          35.671586
+        ]
+      },
+      "id": "node/14280286903"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286904",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944137,
+          35.6718423
+        ]
+      },
+      "id": "node/14280286904"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286905",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944057,
+          35.6718785
+        ]
+      },
+      "id": "node/14280286905"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286906",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4944027,
+          35.6719095
+        ]
+      },
+      "id": "node/14280286906"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286907",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943958,
+          35.6719385
+        ]
+      },
+      "id": "node/14280286907"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286908",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943915,
+          35.6719798
+        ]
+      },
+      "id": "node/14280286908"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286909",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943906,
+          35.6720034
+        ]
+      },
+      "id": "node/14280286909"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286910",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943863,
+          35.6720372
+        ]
+      },
+      "id": "node/14280286910"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286911",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943859,
+          35.6720685
+        ]
+      },
+      "id": "node/14280286911"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286912",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942616,
+          35.6720887
+        ]
+      },
+      "id": "node/14280286912"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286913",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942663,
+          35.6720609
+        ]
+      },
+      "id": "node/14280286913"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286914",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942679,
+          35.6720313
+        ]
+      },
+      "id": "node/14280286914"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286915",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942728,
+          35.6719575
+        ]
+      },
+      "id": "node/14280286915"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286916",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942764,
+          35.6719302
+        ]
+      },
+      "id": "node/14280286916"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286917",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942393,
+          35.6722168
+        ]
+      },
+      "id": "node/14280286917"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286918",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942358,
+          35.6722565
+        ]
+      },
+      "id": "node/14280286918"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286919",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942325,
+          35.6722895
+        ]
+      },
+      "id": "node/14280286919"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286920",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942275,
+          35.6723171
+        ]
+      },
+      "id": "node/14280286920"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286921",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942159,
+          35.6724465
+        ]
+      },
+      "id": "node/14280286921"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286922",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942124,
+          35.6724769
+        ]
+      },
+      "id": "node/14280286922"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286923",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942063,
+          35.6725452
+        ]
+      },
+      "id": "node/14280286923"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286924",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.494194,
+          35.6726086
+        ]
+      },
+      "id": "node/14280286924"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286925",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943232,
+          35.6726468
+        ]
+      },
+      "id": "node/14280286925"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286926",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943208,
+          35.6726117
+        ]
+      },
+      "id": "node/14280286926"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286927",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.494331,
+          35.6725561
+        ]
+      },
+      "id": "node/14280286927"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286928",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943328,
+          35.6725164
+        ]
+      },
+      "id": "node/14280286928"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286929",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943403,
+          35.6724852
+        ]
+      },
+      "id": "node/14280286929"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286930",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943448,
+          35.672453
+        ]
+      },
+      "id": "node/14280286930"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286931",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943478,
+          35.6723651
+        ]
+      },
+      "id": "node/14280286931"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286932",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.494356,
+          35.6723287
+        ]
+      },
+      "id": "node/14280286932"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286933",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943593,
+          35.6722954
+        ]
+      },
+      "id": "node/14280286933"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286934",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943658,
+          35.6722649
+        ]
+      },
+      "id": "node/14280286934"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286935",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943662,
+          35.6722345
+        ]
+      },
+      "id": "node/14280286935"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286936",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943705,
+          35.6721979
+        ]
+      },
+      "id": "node/14280286936"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286937",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943735,
+          35.6721638
+        ]
+      },
+      "id": "node/14280286937"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286938",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943129,
+          35.6716359
+        ]
+      },
+      "id": "node/14280286938"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286939",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943157,
+          35.6716083
+        ]
+      },
+      "id": "node/14280286939"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286940",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943113,
+          35.6716999
+        ]
+      },
+      "id": "node/14280286940"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286941",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4943063,
+          35.6717327
+        ]
+      },
+      "id": "node/14280286941"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286942",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942986,
+          35.6717701
+        ]
+      },
+      "id": "node/14280286942"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286943",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942959,
+          35.6718056
+        ]
+      },
+      "id": "node/14280286943"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286944",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942922,
+          35.671832
+        ]
+      },
+      "id": "node/14280286944"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "@id": "node/14280286945",
+        "denotation": "avenue",
+        "leaf_cycle": "deciduous",
+        "leaf_type": "broadleaved",
+        "natural": "tree",
+        "sex": "female",
+        "species": "Ginkgo biloba",
+        "species:ja": "イチョウ"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.4942884,
+          35.6718634
+        ]
+      },
+      "id": "node/14280286945"
     }
   ]
 }
