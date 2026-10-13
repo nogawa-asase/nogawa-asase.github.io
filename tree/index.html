@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>町の木マップ</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    #map { height: 100%; }
+
+    .filter-box {
+      background: #fff;
+      padding: 10px 12px;
+      border-radius: 6px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.35);
+      font: 14px/1.4 system-ui, -apple-system, "Hiragino Sans", "Yu Gothic", sans-serif;
+    }
+    .filter-box label { display: block; margin-bottom: 4px; font-weight: 600; }
+    .filter-box select { font-size: 16px; padding: 4px; max-width: 220px; }
+    .filter-box .count { margin-top: 6px; color: #555; }
+    .filter-box .ginkgo-row { display: flex; align-items: flex-start; gap: 6px; margin-top: 10px; padding-top: 8px; border-top: 1px solid #ddd; font-weight: 400; cursor: pointer; }
+    .filter-box .ginkgo-row input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: #f9a825; flex: none; }
+    .filter-box .ginkgo-row.disabled { color: #999; cursor: default; }
+    .filter-box .hint { margin-top: 4px; font-size: 12px; color: #777; max-width: 220px; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // ---- 名前の取り出しと表記ゆれの吸収 ----
+
+    // ひらがなをカタカナにそろえる(「けやき」と「ケヤキ」を同じ木として扱う)
+    function toKatakana(str) {
+      return str.replace(/[\u3041-\u3096]/g, c =>
+        String.fromCharCode(c.charCodeAt(0) + 0x60));
+    }
+
+    // 日本語名を優先して、なければ学名、どちらもなければ「名前不明の木」
+    function getName(props) {
+      const raw = props['species:ja'] || props['name:ja'] || props['name'] || props['species'];
+      return raw ? toKatakana(raw.trim()) : '名前不明の木';
+    }
+
+    // イチョウかどうか(学名か日本語名で判定)
+    function isGinkgo(props) {
+      const sci = props['species'] || props['genus'] || props['taxon'] || '';
+      return /^ginkgo/i.test(sci.trim()) || getName(props) === 'イチョウ';
+    }
+
+    // ぎんなんがなる木 = sex=female のイチョウ
+    function isFemaleGinkgo(props) {
+      return isGinkgo(props) && String(props['sex'] || '').trim().toLowerCase() === 'female';
+    }
+
+    // ---- 地図の準備 ----
+
+    const map = L.map('map').setView([35.68, 139.76], 15);
+
+    L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html">地理院タイル</a> | &copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    let allFeatures = [];
+    let treeLayer = null;
+
+    // ---- 絞り込みの部品(地図の右上に置く) ----
+
+    const select = document.createElement('select');
+    const countText = document.createElement('div');
+    countText.className = 'count';
+
+    const ginkgoRow = document.createElement('label');
+    ginkgoRow.className = 'ginkgo-row';
+    const ginkgoCheck = document.createElement('input');
+    ginkgoCheck.type = 'checkbox';
+    const ginkgoLabel = document.createElement('span');
+    ginkgoRow.append(ginkgoCheck, ginkgoLabel);
+    const ginkgoHint = document.createElement('div');
+    ginkgoHint.className = 'hint';
+
+    const filterControl = L.control({ position: 'topright' });
+    filterControl.onAdd = function () {
+      const box = L.DomUtil.create('div', 'filter-box');
+      const label = document.createElement('label');
+      label.textContent = '木の種類';
+      label.htmlFor = 'species-select';
+      select.id = 'species-select';
+      box.append(label, select, ginkgoRow, ginkgoHint, countText);
+      // 部品の操作で地図が動かないようにする
+      L.DomEvent.disableClickPropagation(box);
+      L.DomEvent.disableScrollPropagation(box);
+      return box;
+    };
+    filterControl.addTo(map);
+
+    // ---- 表示の更新 ----
+
+    function render(selected, fit) {
+      if (treeLayer) map.removeLayer(treeLayer);
+
+      const onlyFemale = ginkgoCheck.checked;
+      const shown = allFeatures.filter(f => {
+        const p = f.properties || {};
+        if (onlyFemale) return isFemaleGinkgo(p);
+        return selected === '' || getName(p) === selected;
+      });
+
+      treeLayer = L.geoJSON(shown, {
+        pointToLayer: (feature, latlng) =>
+          isFemaleGinkgo(feature.properties || {})
+            ? L.circleMarker(latlng, { radius: 10, color: '#e65100', fillColor: '#ffca28', fillOpacity: 0.95, weight: 3 })
+            : L.circleMarker(latlng, { radius: 9, color: '#2e7d32', fillColor: '#66bb6a', fillOpacity: 0.85 }),
+        onEachFeature: (feature, layer) => {
+          const p = feature.properties || {};
+          let html = '<strong>' + getName(p) + '</strong>';
+          if (isFemaleGinkgo(p)) html += '<br>メス(ぎんなんがなる)';
+          if (p.height) html += '<br>高さ 約' + p.height + 'm';
+          layer.bindPopup(html);
+        }
+      }).addTo(map);
+
+      countText.textContent = shown.length + '本を表示';
+
+      if (fit && shown.length > 0) {
+        map.fitBounds(treeLayer.getBounds(), { maxZoom: 17, padding: [40, 40] });
+      }
+    }
+
+    function buildOptions() {
+      // 種類ごとの本数を数える
+      const counts = {};
+      allFeatures.forEach(f => {
+        const name = getName(f.properties || {});
+        counts[name] = (counts[name] || 0) + 1;
+      });
+
+      select.innerHTML = '';
+      const all = document.createElement('option');
+      all.value = '';
+      all.textContent = 'すべて(' + allFeatures.length + '本)';
+      select.appendChild(all);
+
+      const femaleCount = allFeatures.filter(f => isFemaleGinkgo(f.properties || {})).length;
+      ginkgoLabel.textContent = 'ぎんなんがなる木(イチョウのメス)だけ(' + femaleCount + '本)';
+      ginkgoCheck.disabled = femaleCount === 0;
+      ginkgoRow.classList.toggle('disabled', femaleCount === 0);
+      ginkgoHint.textContent = femaleCount === 0
+        ? 'まだ登録がありません。イチョウに sex=female を付けて、trees.geojson を書き出し直してください。'
+        : '';
+
+      Object.keys(counts)
+        .sort((a, b) => a.localeCompare(b, 'ja'))
+        .forEach(name => {
+          const opt = document.createElement('option');
+          opt.value = name;
+          opt.textContent = name + '(' + counts[name] + '本)';
+          select.appendChild(opt);
+        });
+    }
+
+    select.addEventListener('change', () => render(select.value, true));
+
+    // チェック中は、種類の選択を使えなくして、組み合わせで迷わないようにする
+    ginkgoCheck.addEventListener('change', () => {
+      select.disabled = ginkgoCheck.checked;
+      render(select.value, true);
+    });
+
+    // ---- データの読み込み ----
+
+    fetch('trees.geojson')
+      .then(res => res.json())
+      .then(data => {
+        // 点として登録された木だけを使う
+        allFeatures = (data.features || []).filter(f =>
+          f.geometry && f.geometry.type === 'Point');
+        buildOptions();
+        render('', true);
+      })
+      .catch(err => {
+        countText.textContent = '木のデータを読み込めませんでした';
+        console.error('trees.geojson を読み込めませんでした', err);
+      });
+  </script>
+</body>
+</html>
