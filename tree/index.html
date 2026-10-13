@@ -148,7 +148,7 @@
       ginkgoCheck.disabled = femaleCount === 0;
       ginkgoRow.classList.toggle('disabled', femaleCount === 0);
       ginkgoHint.textContent = femaleCount === 0
-        ? 'まだ登録がありません。イチョウに sex=female を付けて、trees.geojson を書き出し直してください。'
+        ? 'まだ登録がありません。イチョウに sex=female を付けて、export.geojson を書き出し直してください。'
         : '';
 
       Object.keys(counts)
@@ -171,7 +171,7 @@
 
     // ---- データの読み込み ----
 
-    fetch('trees.geojson')
+    fetch('export.geojson')
       .then(res => res.json())
       .then(data => {
         // 点として登録された木だけを使う
@@ -182,7 +182,7 @@
       })
       .catch(err => {
         countText.textContent = '木のデータを読み込めませんでした';
-        console.error('trees.geojson を読み込めませんでした', err);
+        console.error('export.geojson を読み込めませんでした', err);
       });
   </script>
 </body>
